@@ -55,14 +55,15 @@ for key, value in class_weights.items():
 
 BATCH_SIZE = 64
 img_size = (224,224)
-data_dir = "/mnt/sdc1/2022_va_gr15/dataset_v3_augmentation/training_caip_contest/"
-data_dir = pathlib.Path(data_dir)
+train_data_dir = "/mnt/sdc1/2022_va_gr15/dataset_for_vgg_undersampling_v3/training_caip_contest/"
+train_data_dir = pathlib.Path(train_data_dir)
+val_data_dir = "/mnt/sdc1/2022_va_gr15/dataset_for_vgg_undersampling_v3/validation_caip_contest/"
+val_data_dir = pathlib.Path(val_data_dir)
 
 
 gen = ImageDataGenerator(rescale=1. / 255, validation_split=0.2)
-train_generator = gen.flow_from_directory(data_dir, target_size=img_size, subset='training',batch_size=BATCH_SIZE, class_mode='categorical',shuffle=True,seed=999)
-val_generator = gen.flow_from_directory(data_dir, target_size=img_size, subset='validation',batch_size=BATCH_SIZE, class_mode='categorical',shuffle=True,seed=999)
-
+train_generator = gen.flow_from_directory(train_data_dir, target_size=img_size, subset='training',batch_size=BATCH_SIZE, class_mode='categorical',shuffle=True,seed=999)
+val_generator = gen.flow_from_directory(val_data_dir, target_size=img_size, subset='validation',batch_size=BATCH_SIZE, class_mode='categorical',shuffle=True,seed=999)
 
 #-----CUSTOM LOSS FUNCTION-----
 
